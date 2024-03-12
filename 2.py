@@ -83,7 +83,7 @@ class App:
     def rotate_all_subfigures(self):
         angle = 30
         self.compound_figure.rotate_all(angle)
-# пук пук пук 
+# пук пук пук ger
 if __name__ == "__main__":
     root = tk.Tk()
     app = App(root)
