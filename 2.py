@@ -14,7 +14,6 @@ class Subfigure:
             self.canvas.delete(self.subfigure_id)
         self.subfigure_id = self.canvas.create_polygon(self.vertices, outline='black', fill=self.color, width=3)
 
-
     def rotate(self, angle):
         angle_rad = math.radians(angle)
         center = self.calculate_center()
@@ -53,37 +52,34 @@ class App:
         screen_width = 1000
         screen_height = 800
 
-        # Установить размеры окна
+
         self.root.geometry(f"{screen_width}x{screen_height}")
 
-        # Создать холст
-        self.canvas = tk.Canvas(root, width=screen_width, height=screen_height, bg='white')
-        self.canvas.pack(expand=True, fill=tk.BOTH)
+
+        self.frame = tk.Frame(root)
+        self.frame.pack(fill=tk.BOTH, expand=True)
+
+
+        self.canvas = tk.Canvas(self.frame, width=screen_width, height=screen_height, bg='white')
+        self.canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
 
         self.compound_figure = CompoundFigure(self.canvas)
         x_val = 400
         y_val = 300
-        
-        square_kvadrat = Subfigure(self.canvas, [(x_val + 50, y_val + 100), (x_val + 150, y_val + 100), (x_val + 150, y_val + 200), (x_val + 50, y_val + 200)], color='')
-        square_krisha = Subfigure(self.canvas, [(x_val + 50, y_val + 100), (x_val + 100, y_val + 50), (x_val + 150, y_val + 100)], color='')
-        square_seredina = Subfigure(self.canvas, [(x_val + 50, y_val + 150), (x_val + 150, y_val + 150)], color='')
-        square_vvpalka = Subfigure(self.canvas, [(x_val + 50, y_val + 150), (x_val + 150, y_val + 100)], color='')
-        square_nnpalka = Subfigure(self.canvas, [(x_val + 50, y_val + 150), (x_val + 150, y_val + 200)], color='')
 
+        square_kvadrat = Subfigure(self.canvas, [(x_val + 50, y_val + 100), (x_val + 150, y_val + 100), (x_val + 150, y_val + 200), (x_val + 50, y_val + 200), (x_val + 50, y_val + 100), (x_val + 100, y_val + 50), (x_val + 150, y_val + 100), (x_val + 50, y_val + 150), (x_val + 150, y_val + 150), (x_val + 50, y_val + 150), (x_val + 150, y_val + 100), (x_val + 50, y_val + 150), (x_val + 150, y_val + 200)], color='')
+    
 
         self.compound_figure.add_subfigure(square_kvadrat)
-        self.compound_figure.add_subfigure(square_krisha)
-        self.compound_figure.add_subfigure(square_seredina)
-        self.compound_figure.add_subfigure(square_vvpalka)
-        self.compound_figure.add_subfigure(square_nnpalka)
-
-        self.rotate_button = tk.Button(root, text="Rotate All", command=self.rotate_all_subfigures)
-        self.rotate_button.pack(pady=10)
+       
+        
+        self.rotate_button = tk.Button(self.frame, text="Rotate All", command=self.rotate_all_subfigures)
+        self.rotate_button.pack(side=tk.LEFT, padx=10, pady=10)
 
     def rotate_all_subfigures(self):
         angle = 30
         self.compound_figure.rotate_all(angle)
-# пук пук пук 
+
 if __name__ == "__main__":
     root = tk.Tk()
     app = App(root)
